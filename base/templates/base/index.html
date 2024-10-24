@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<div class="bg-gray-200 dark:bg-gray-900 min-h-screen flex">
+
+  <!-- Sidebar: Categories -->
+  <aside class="w-1/4 bg-gray-100 dark:bg-gray-700 p-6 shadow-lg">
+    <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Categories</h2>
+    <ul class="space-y-4">
+      {% for category in categories %}
+      <li>
+        <a href="?category={{ category.name }}" class="block text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+          {{ category.name }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </aside>
+
+  <!-- Product Grid -->
+  <main class="w-3/4 p-6">
+    <h1 class="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Products</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for product in products %}
+      <div class="bg-white dark:bg-gray-700 shadow-md rounded-lg overflow-hidden">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-48 object-cover">
+        <div class="p-4">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">{{ product.name }}</h3>
+          <p class="text-gray-600 dark:text-gray-400">{{ product.description }}</p>
+          <p class="text-xl font-bold mt-2 text-gray-900 dark:text-gray-200">${{ product.price }}</p>
+          <a href="{% url 'product_detail' product.id %}"
+             class="block mt-4 text-center text-white bg-blue-600 dark:bg-blue-500 py-2 rounded
+             hover:bg-blue-700 dark:hover:bg-blue-400">
+             View Details
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </main>
+
+</div>
+{% endblock %}
