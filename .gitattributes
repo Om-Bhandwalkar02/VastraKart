@@ -1,0 +1,2 @@
+echo "*.py linguist-detectable" >> .gitattributes
+echo "*.html linguist-detectable=false" >> .gitattributes
